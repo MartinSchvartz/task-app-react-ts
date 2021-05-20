@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React,{Fragment, useState} from 'react';
+type FormElement = React.FormEvent<HTMLFormElement>;
+function nextRole () {
+  return {
+    position: "Full stack dev",
+    age: 18,
+    name: "Martin",
+    salary: "60k - 100k usd"
+  }
+}
 function App() {
+  const [newTask, setNewTask] = useState('');
+
+  const handleSubmit = (e: FormElement) =>{
+    e.preventDefault();
+    console.log (newTask);
+
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <form onSubmit={handleSubmit}>
+        <h1>Rol: {nextRole().position} </h1>
+        <h1>Nombre: {nextRole().name}</h1>
+        <h1>Salario: {nextRole().salary}</h1>
+        <input type = "text" onChange = {e => setNewTask(e.target.value)}/>
+        <button>
+          Save
+        </button>
+      </form>
+    </Fragment>
   );
 }
 
